@@ -39,24 +39,24 @@ app.post('/add-book', (req, res) => {
     details[3] = req.body.yearPublished
 
     if(details.length !=4){ //incomplete fields
-        check = false;
+        res.send({success:false});
     }
 
     //check if there is a non-empty string
     if(details[0].length == 0){
-        check = false;
+        res.send({success:false});
     }
 
     if(details[1].length == 0) {
-        check = false;
+        res.send({success:false});
     }
 
     if(details[2].length == 0) {
-        check = false;
+        res.send({success:false});
     }
     
     if(details[3].length == 0) {
-        check = false;
+        res.send({success:false});
     }
     
     if(check){
@@ -72,6 +72,25 @@ app.post('/add-book', (req, res) => {
         res.send({success:false});
     }
  
+});
+
+app.get('/find-by-isbn-author', (req, res) => {
+    readFile('books.txt', 'utf8', (err,data) =>{
+      if (err) throw err;
+  
+      var lines = data.split("\n");
+      var result = [];
+  
+      lines.forEach(line => {
+          var line_element = line.split(',');
+  
+          if(line_element.indexOf(req.query.author) == 2 && line_element.indexOf(req.query.isbn) == 1){
+              console.log('Found it:' + line);
+              result.push(line);
+          }
+    });
+    res.send(result);
+  });
 });
 
 
@@ -93,5 +112,6 @@ app.get('/find-by-author', (req, res) => {
   res.send(result);
 });
 });
+
 
 app.listen(3000, () => { console.log('Server started at port 3000')} );
