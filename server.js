@@ -15,6 +15,9 @@ app.post('/submit-data', (req, res) => {
     res.send('Received a POST request.');
 });
 
+app.get('/greeting', (req, res) => {
+  res.send('Hello ' + req.query.name);
+});
 
 // this tells our server to listen to the port 3000
 // we can also pass an optional callback function to execute after the server starts
