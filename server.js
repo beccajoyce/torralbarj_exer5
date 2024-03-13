@@ -44,19 +44,19 @@ app.post('/add-book', (req, res) => {
 
     //check if there is a non-empty string
     if(details[0].length == 0){
-        res.send({success:false});
+        check = false;
     }
 
     if(details[1].length == 0) {
-        res.send({success:false});
+        check = false;
     }
 
     if(details[2].length == 0) {
-        res.send({success:false});
+        check = false;
     }
     
     if(details[3].length == 0) {
-        res.send({success:false});
+        check = false;
     }
     
     if(check){
